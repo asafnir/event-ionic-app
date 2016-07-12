@@ -1,0 +1,54 @@
+<ion-view view-title="Swipe event" class="swipe-page">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content>
+    <div class="list card" ng-show="(currentEvent==='')">
+      <h1>We can't find events</h1>
+    </div>
+    <div class="list card current-event" ng-class="{skipped: currentEvent.rated == false,favorited:currentEvent.rated == true}" ng-show="currentEvent && !currentEvent.hide">
+
+      <div class="item item-image">
+        <img ng-src="{{ currentEvent.cover.source }}">
+      </div>
+
+      <div class="img-lookahead">
+        <img ng-src="{{ nextEventImg() }}" />
+      </div>
+
+      <div class="item">
+        <h2>{{currentEvent.name}} <span ng-hide="currentEvent.loaded"><i class="ion-loading-c"></i></span></h2>
+        <p>{{currentEvent.start_time | date:"dd-MM-yyyy 'at' h:mma"}}</p>
+      </div>
+    </div>
+    <div class="padding" ng-show="currentEvent && !currentEvent.hide">
+      <div class="button-bar">
+        <a class="button icon" ng-click="sendFeedback(false)">
+          <i class="icon ion-thumbsdown"></i>
+        </a>
+        <a class="button icon" href="#/tab/events/{{currentEvent.id}}">
+          <i class="icon ion-information-circled"></i>
+        </a>
+        <a class="button icon" ng-click="sendFeedback(true)">
+          <i class="icon ion-thumbsup"></i>
+        </a>
+      </div>
+    </div>
+  </ion-content>
+  <ion-tabs class="tabs-icon-top tabs-color-active-positive">
+    <!-- Swipe Tab -->
+    <ion-tab title="Swipe" icon-off="ion-arrow-swap" icon-on="ion-arrow-swap" href="#/main/swipe">
+      <ion-nav-view name="tab-swipe"></ion-nav-view>
+    </ion-tab>
+
+    <!-- Chats Tab -->
+    <ion-tab title="Events" icon-off="ion-calendar" icon-on="ion-calendar" href="#/main/events">
+      <ion-nav-view name="tab-events"></ion-nav-view>
+    </ion-tab>
+
+    <!-- Favorites Tab -->
+    <ion-tab title="Favorites" icon-off="ion-star" icon-on="ion-star" badge="favCount()" badge-style="badge-assertive" on-select="enteringFavorites()" on-deselect="leavingFavorites()" href="#/main/favorites">
+      <ion-nav-view name="tab-favorites"></ion-nav-view>
+    </ion-tab>
+  </ion-tabs>
+</ion-view>

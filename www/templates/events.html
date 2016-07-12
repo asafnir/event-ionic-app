@@ -1,0 +1,52 @@
+<ion-view view-title="Events" class="events-page" left-buttons="leftButtons">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content has-header="true">
+    <ion-list>
+      <!-- Search option -->
+<!--       <div class="list list-inset">
+        <label class="item item-input">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input type="text" placeholder="Enter your home address, Apt# and ZIP" ng-model="user.address" googleplace="" class="ng-pristine ng-valid" autocomplete="off">
+        </label>
+      </div> -->
+      <ion-item 
+      class="item-remove-animate item" 
+      ng-repeat="event in events | filter: {cover: '!'}" 
+      type="item-text-wrap" 
+      href="#/tab/events/{{event.id}}"
+      style="background-image: url({{event.cover.source}});min-height: 200px;background-size: cover;background-position: 0 15%;"
+      >
+        <!-- 
+        <div class="item item-image">
+          <img ng-src="{{event.cover.source}}">
+        </div> 
+        -->
+          <div class="event-date">
+            <span class="month">{{event.start_time | date:'MMMM' }}</span>
+            <h2>{{event.start_time | date:'dd' }}</h2>
+          </div>
+          <div class="bar bar-footer">
+            <h2 class="title">{{event.name}}</h2>
+          </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <ion-tabs class="tabs-icon-top tabs-color-active-positive">
+    <!-- Swipe Tab -->
+    <ion-tab title="Swipe" icon-off="ion-arrow-swap" icon-on="ion-arrow-swap" href="#/main/swipe">
+      <ion-nav-view name="tab-swipe"></ion-nav-view>
+    </ion-tab>
+
+    <!-- Chats Tab -->
+    <ion-tab title="Events" icon-off="ion-calendar" icon-on="ion-calendar" href="#/main/events">
+      <ion-nav-view name="tab-events"></ion-nav-view>
+    </ion-tab>
+
+    <!-- Favorites Tab -->
+    <ion-tab title="Favorites" icon-off="ion-star" icon-on="ion-star" badge="favCount()" badge-style="badge-assertive" on-select="enteringFavorites()" on-deselect="leavingFavorites()" href="#/main/favorites">
+      <ion-nav-view name="tab-favorites"></ion-nav-view>
+    </ion-tab>
+  </ion-tabs>
+</ion-view>

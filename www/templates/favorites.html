@@ -1,0 +1,33 @@
+<ion-view view-title="Favorites" class="favorites-page">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content>
+  	<div class="card" ng-show="{{favorites==false}}">
+  	  <div class="item item-text-wrap">
+  	    You Don't have any event in your favorites
+  	  </div>
+  	</div>
+    <ion-item ng-repeat="event in favorites" class="item-avatar item-icon-right" href="#/tab/events/{{event.id}}">
+      <img ng-src="{{ event.cover.source }}">
+      <h2>{{ event.name }}</h2>
+      <a class="button button-icon icon ion-minus-circled" ng-click="removeEvent(event, $index)"></a>
+    </ion-item> 
+  </ion-content>
+  <ion-tabs class="tabs-icon-top tabs-color-active-positive">
+    <!-- Swipe Tab -->
+    <ion-tab title="Swipe" icon-off="ion-arrow-swap" icon-on="ion-arrow-swap" href="#/main/swipe">
+      <ion-nav-view name="tab-swipe"></ion-nav-view>
+    </ion-tab>
+
+    <!-- Chats Tab -->
+    <ion-tab title="Events" icon-off="ion-calendar" icon-on="ion-calendar" href="#/main/events">
+      <ion-nav-view name="tab-events"></ion-nav-view>
+    </ion-tab>
+
+    <!-- Favorites Tab -->
+    <ion-tab title="Favorites" icon-off="ion-star" icon-on="ion-star" badge="favCount()" badge-style="badge-assertive" on-select="enteringFavorites()" on-deselect="leavingFavorites()" href="#/main/favorites">
+      <ion-nav-view name="tab-favorites"></ion-nav-view>
+    </ion-tab>
+  </ion-tabs>
+</ion-view>

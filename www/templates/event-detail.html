@@ -1,0 +1,41 @@
+<ion-view view-title="{{event.name}}" class="event-page">
+  <ion-nav-back-button>
+  </ion-nav-back-button>
+  <ion-content class="">
+    <div class="event-top item item-image">
+      <img src="{{event.cover.source}}">
+    </div>
+    <div class="row">
+      <div class="col text-center">
+        <h2>{{event.name}}</h2>
+        <h3 class="event-location">
+          <i class="icon ion-location"></i> 
+          {{event.place.location.city}}, {{event.place.location.country}}
+        </h3>
+        <h3 class="event-time">
+          <i class="icon ion-clock"></i> 
+          {{event.start_time | date:"dd-MM-yyyy 'at' h:mma"}}
+        </h3>
+      </div>
+    </div>
+    <div class="row padding">
+      <div class="event-tools button-bar">
+        <a class="button ion-star" ng-click="sendFeedback(liked)" ng-class="{ 'active': liked == true }"></a>
+        <a class="button ion-calendar" ng-click="addEventToCalendar()" ng-disabled="eventAdd"></a>
+        <a class="button ion-model-s"></a>
+      </div>
+    </div>
+    <div class="item divider red">
+      <span>Description</span>
+    </div>
+    <div class="row padding description-wrapper">
+      <p class="description" dd-text-collapse dd-text-collapse-max-length="200" dd-text-collapse-text="{{event.description}}"></p>
+    </div>
+    <div class="item divider green">
+      <span>Location</span>
+    </div>
+    <div class="item item-image">
+      <img class="map" src="https://maps.googleapis.com/maps/api/staticmap?center={{event.place.location.latitude}},{{event.place.location.longitude}}&zoom=10&size=720x336&markers=color:red|{{event.place.location.latitude}},{{event.place.location.longitude}}">
+    </div>
+  </ion-content>
+</ion-view>
